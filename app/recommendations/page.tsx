@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { BookOpen } from 'lucide-react';
@@ -12,8 +13,13 @@ import Link from 'next/link';
 
 export default function RecommendationsPage() {
   const searchParams = useSearchParams();
-  const preferencesParam = searchParams.get('preferences');
-  const preferences: BookPreferences = preferencesParam ? JSON.parse(decodeURIComponent(preferencesParam)) : null;
+  const [preferences, setPreferences] = useState<BookPreferences | null>(null);
+  useEffect(() => {
+    const preferencesParam = searchParams.get('preferences');
+    if (preferencesParam) {
+      setPreferences(JSON.parse(decodeURIComponent(preferencesParam)));
+    }
+  }, [searchParams]);
 
   const recommendedBook = preferences ? findBestMatch(preferences) : BOOK_DATABASE[0];
 
