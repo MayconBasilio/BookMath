@@ -38,11 +38,11 @@ export async function login(response: NextResponse, token: string) {
 }
 
 export async function logout() {
-  cookies().delete('token');
+  (await cookies()).set('token', '', { expires: new Date(0) });
 }
 
 export async function getSession() {
-  const token = cookies().get('token')?.value;
+  const token = (await cookies()).get('token')?.value;
   if (!token) return null;
   try {
     return await decrypt(token);

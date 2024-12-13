@@ -1,8 +1,10 @@
 export interface BookPreferences {
-  favoriteGenres: string[];
+  genres: string[];
   readingFrequency: string;
   preferredLength: string;
-  themes: string[];
+  readingPurpose: string[];
+  moodPreference: string[];
+  writingStyle: string[];
 }
 
 export interface Book {
@@ -10,9 +12,10 @@ export interface Book {
   title: string;
   author: string;
   genres: string[];
-  themes: string[];
+  mood: string[];
+  writingStyle: string[];
+  purpose: string[];
+  length: string;
   description: string;
   coverUrl: string;
-  pageCount: number;
-  rating: number;
 }
