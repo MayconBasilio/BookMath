@@ -18,6 +18,7 @@ export default function RecommendationsPage() {
   const recommendedBook = preferences ? findBestMatch(preferences) : BOOK_DATABASE[0];
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col items-center text-center space-y-8 mb-12">
@@ -43,5 +44,6 @@ export default function RecommendationsPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
